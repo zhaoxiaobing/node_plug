@@ -1,7 +1,7 @@
 "use strict";
 
 
-//letÃüÁî£¬ÓÃÀ´ÉùÃ÷±äÁ¿¡£ËüµÄÓÃ·¨ÀàËÆÓÚvar£¬µ«ÊÇËùÉùÃ÷µÄ±äÁ¿£¬Ö»ÔÚletÃüÁîËùÔÚµÄ´úÂë¿éÄÚÓÐÐ§¡£let²»´æÔÚ±äÁ¿ÌáÉý
+//letå‘½ä»¤ï¼Œç”¨æ¥å£°æ˜Žå˜é‡ã€‚å®ƒçš„ç”¨æ³•ç±»ä¼¼äºŽvarï¼Œä½†æ˜¯æ‰€å£°æ˜Žçš„å˜é‡ï¼Œåªåœ¨letå‘½ä»¤æ‰€åœ¨çš„ä»£ç å—å†…æœ‰æ•ˆã€‚letä¸å­˜åœ¨å˜é‡æå‡
 {
     let a = 10;
     var b = 1;
@@ -9,7 +9,7 @@
 
 console.log(b);
 
-//forÑ­»·µÄ¼ÆÊýÆ÷£¬¾ÍºÜºÏÊÊÊ¹ÓÃletÃüÁî¡£
+//forå¾ªçŽ¯çš„è®¡æ•°å™¨ï¼Œå°±å¾ˆåˆé€‚ä½¿ç”¨letå‘½ä»¤ã€‚
 var arr = [1,2,3];
 for(let i = 0; i < arr.length; i++){}
 //*** console.log(i); //i is not defined
@@ -18,17 +18,17 @@ var tmp = 123;
 console.log(tmp);
 if (true) {
     //tmp = 'abc'; // ReferenceError
-    let tmp; //±»×ª»¯ÎªifÄÚ²¿µÄ±äÁ¿£¬letÉùÃ÷±äÁ¿Ç°£¬¶Ôtmp¸³Öµ»á±¨´í¡£
+    let tmp; //è¢«è½¬åŒ–ä¸ºifå†…éƒ¨çš„å˜é‡ï¼Œletå£°æ˜Žå˜é‡å‰ï¼Œå¯¹tmpèµ‹å€¼ä¼šæŠ¥é”™ã€‚
 }
 //*** console.log(tmp); //tmp is not defined
 
 
 if (true) {
-    // TDZ¿ªÊ¼
+    // TDZå¼€å§‹
     //tmp = 'abc'; // ReferenceError   tmp is not defined
     //console.log(tmp); // ReferenceError   tmp is not defined
 
-    let tmp; // TDZ½áÊø
+    let tmp; // TDZç»“æŸ
     console.log(tmp); // undefined
 
     tmp = 123;
@@ -36,7 +36,7 @@ if (true) {
 }
 
 function func(arg) {
-    //let arg; // ±¨´í
+    //let arg; // æŠ¥é”™
     console.log(arg);
 }
 func('1');
@@ -56,10 +56,10 @@ var promise = new Promise(function(resolve, reject) {
         resolve();
     },2000);
     /*if (true){
-        resolve(value);
-    } else {
-        reject(error);
-    }*/
+     resolve(value);
+     } else {
+     reject(error);
+     }*/
 });
 
 promise.then(function(){
