@@ -1,7 +1,15 @@
 {
-  "html" : "http:\/\/127.0.0.1:9999/html",
-  "images" : "http://127.0.0.1:9999/images",
-  "less" : "http://127.0.0.1:9999/less",
-  "css" : "http://127.0.0.1:9999/css",
-  "js" : "http://127.0.0.1:9999/js"
+  "url":{
+    "html" : "http://127.0.0.1:9999/public/html/",
+    "images" : "http://127.0.0.1:9999/public/images/",
+    "less" : "http://127.0.0.1:9999/public/less/",
+    "css" : "http://127.0.0.1:9999/public/css/",
+    "js" : "http://127.0.0.1:9999/public/js/"
+  },
+  "mount" : {
+    "html" : "./public/pages",
+    "images" : "./public/images",
+    "styles" : "./public/styles",
+    "scripts" : "./public/scripts"
+  }
 }
