@@ -10,6 +10,6 @@
     "html" : "./public/pages",
     "images" : "./public/images",
     "styles" : "./public/styles",
-    "scripts" : "./public/scripts"
+    "js" : "./public/js"
   }
 }
