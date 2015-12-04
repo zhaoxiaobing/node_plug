@@ -48,11 +48,39 @@ app.get(htmlUrls.path + ':name',function(req,res){
 app.get(jsUrls.path + ':name',function(req,res){
   var name = req.params['name'],
       b = browserify(path.resolve(options.mount.js, name), {
-        basedir : dir
+      basedir : dir
+    });
+    res.set('Content-Type', 'application/json');
+    b.transform((f) =>{
+      console.log(1);
+    console.log(f);
+    if (f.match(/\.js$/)) {
+      return through(function (chunk) {
+        this.queue(chunk);
+        this.queue(null);
       });
-
-  console.log(through(b.transform()).queue());
-
+    } else if (f.match(/\.css$/)) {
+      var css = [];
+      return through(function (chunk) {
+        css.push(chunk);
+      }, function () {
+        css = Handlebars.compile(css.join(''))(options).replace(/(\r|\n)/g, '');
+        this.queue(
+            'var style = document.createElement("style");' +
+            'style.innerHTML=\'' + css + '\';' +
+            'document.getElementsByTagName("head")[0].appendChild(style);');
+        this.queue(null);
+      });
+    }
+  });
+    b.bundle(function(e, buf) => {
+      if (e) {
+      console.error(e);
+      res.sendStatus(500);
+      return;
+    }
+    res.send(buf);
+  });
 });
 
 

@@ -1,10 +1,10 @@
 {
   "url":{
-    "html" : "http://127.0.0.1:9999/public/html/",
-    "images" : "http://127.0.0.1:9999/public/images/",
-    "less" : "http://127.0.0.1:9999/public/less/",
-    "css" : "http://127.0.0.1:9999/public/css/",
-    "js" : "http://127.0.0.1:9999/public/js/"
+    "html" : "http://127.0.0.1:8888/public/html/",
+    "images" : "http://127.0.0.1:8888/public/images/",
+    "less" : "http://127.0.0.1:8888/public/less/",
+    "css" : "http://127.0.0.1:8888/public/css/",
+    "js" : "http://127.0.0.1:8888/public/js/"
   },
   "mount" : {
     "html" : "./public/pages",
