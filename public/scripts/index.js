@@ -2,5 +2,14 @@
  * Created by zhaoxiaobing on 2015/12/1.
  */
 
-common = require('./common.js');
-common.test();
+
+var jquery = require('jquery');
+var common = require('./common');
+
+
+jquery(function(){
+    alert(0);
+    common.test();
+    //common.test();
+});
+

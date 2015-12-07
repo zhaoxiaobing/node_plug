@@ -24,7 +24,7 @@ var htmlUrls = url.parse(options.url.html),
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.use(imagesUrls.path,express.static(options.mount.images));
-app.use(jsUrls.path,express.static(options.mount.js));
+//app.use(jsUrls.path,express.static(options.mount.js));
 //app.use(cssUrls.path,express.static(options.mount.styles));
 
 
@@ -34,21 +34,6 @@ var data = { "name": "Alan", "hometown": "Somewhere, TX","imagesUrl":options.url
 
 Handlebars.registerHelper('script',function(value){
     var val = jsUrls.href + value;
-    console.log(val);
-    var b = browserify(path.resolve(options.mount.scripts, value));
-    //b.add();
-    b.bundle(function(e, buf){
-        if (e) {
-            console.error(e);
-            res.sendStatus(500);
-            return;
-        }
-        //res.send(buf);
-        fs.writeFile(path.resolve(options.mount.js, value), buf,'utf8',function(){
-            console.log('-------------1');
-        });
-    });
-    console.log('-------------2');
     return new Handlebars.SafeString('<script src="'+val+'"></script>');
 });
 
@@ -57,40 +42,37 @@ app.get(htmlUrls.path + ':name',function(req,res){
     let name = req.params['name'],
         html = fs.readFileSync(path.join(dir,htmlUrls.path,name),"utf-8"),
         result = Handlebars.compile(html)(data);
-    console.log('11111111111');
     res.send(result);
-    console.log('22222222222');
 });
 
 
 
 
-/*app.get(jsUrls.path + ':name',function(req,res){
-    var name = req.params['name'],
-        b = browserify(path.resolve(options.mount.js, name));
-    //b.add(path.resolve(options.mount.js, name));
-    //var data = b.bundle().pipe(process.stdout);
+app.get(jsUrls.path + ':name',function(req,res){
+    var name = req.params['name'];
+    var b = browserify(path.resolve(options.mount.scripts, name));
+    /*b.add(path.resolve(options.mount.js, name));
+    var data = b.bundle().pipe(process.stdout);
 
-    //through(function write(data) {
-    //    this.queue(data) //data *must* not be null
-    //},
-    //function end () { //optional
-    //    this.queue(null)
-    //});
+    through(function write(data) {
+        this.queue(data) //data *must* not be null
+    },
+    function end () { //optional
+        this.queue(null)
+    });*/
 
+    //b.add();
     b.bundle(function(e, buf){
         if (e) {
             console.error(e);
             res.sendStatus(500);
             return;
         }
-        //res.send(buf);
-        fs.writeFile('./1.js', buf,'utf8');
+        fs.writeFileSync(path.resolve(options.mount.js, name), buf,'utf8');
+        res.send(buf);
     });
-    //fs.writeFile('./1.js', js,'utf8');
-    //console.log(through(b.transform()).queue());
-    //console.log('1-----------------');
-});*/
+
+});
 
 
 
