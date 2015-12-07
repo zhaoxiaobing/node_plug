@@ -13,6 +13,7 @@
     "express": "~4.13.1",
     "handlebars": "^4.0.5",
     "jade": "~1.11.0",
+    "less": "^2.5.3",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "through": "^2.3.8",

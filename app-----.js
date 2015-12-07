@@ -52,27 +52,25 @@ app.get(jsUrls.path + ':name',function(req,res){
     });
     res.set('Content-Type', 'application/json');
     b.transform((f) =>{
-      console.log(1);
-    console.log(f);
-    if (f.match(/\.js$/)) {
-      return through(function (chunk) {
-        this.queue(chunk);
-        this.queue(null);
-      });
-    } else if (f.match(/\.css$/)) {
-      var css = [];
-      return through(function (chunk) {
-        css.push(chunk);
-      }, function () {
-        css = Handlebars.compile(css.join(''))(options).replace(/(\r|\n)/g, '');
-        this.queue(
-            'var style = document.createElement("style");' +
-            'style.innerHTML=\'' + css + '\';' +
-            'document.getElementsByTagName("head")[0].appendChild(style);');
-        this.queue(null);
-      });
-    }
-  });
+      if (f.match(/\.js$/)) {
+        return through(function (chunk) {
+          this.queue(chunk);
+          this.queue(null);
+        });
+      } else if (f.match(/\.css$/)) {
+        var css = [];
+        return through(function (chunk) {
+          css.push(chunk);
+        }, function () {
+          css = Handlebars.compile(css.join(''))(options).replace(/(\r|\n)/g, '');
+          this.queue(
+              'var style = document.createElement("style");' +
+              'style.innerHTML=\'' + css + '\';' +
+              'document.getElementsByTagName("head")[0].appendChild(style);');
+          this.queue(null);
+        });
+      }
+    });
     b.bundle(function(e, buf) => {
       if (e) {
       console.error(e);

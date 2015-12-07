@@ -4,12 +4,14 @@
     "images" : "http://127.0.0.1:8888/public/images/",
     "less" : "http://127.0.0.1:8888/public/less/",
     "css" : "http://127.0.0.1:8888/public/css/",
+    "scripts" : "http://127.0.0.1:8888/public/scripts/",
     "js" : "http://127.0.0.1:8888/public/js/"
   },
   "mount" : {
     "html" : "./public/pages",
     "images" : "./public/images",
     "styles" : "./public/styles",
+    "scripts" : "./public/scripts",
     "js" : "./public/js"
   }
 }
