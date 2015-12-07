@@ -24,7 +24,7 @@ var htmlUrls = url.parse(options.url.html),
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.use(imagesUrls.path,express.static(options.mount.images));
-//app.use(jsUrls.path,express.static(options.mount.js));
+app.use(jsUrls.path,express.static(options.mount.js));
 //app.use(cssUrls.path,express.static(options.mount.styles));
 
 
@@ -34,6 +34,16 @@ var data = { "name": "Alan", "hometown": "Somewhere, TX","imagesUrl":options.url
 
 Handlebars.registerHelper('script',function(value){
     var val = jsUrls.href + value;
+    var b = browserify(path.resolve(options.mount.scripts, value));
+    b.bundle(function(e, buf){
+        if (e) {
+            console.error(e);
+            res.sendStatus(500);
+            return;
+        }
+        fs.writeFileSync(path.resolve(options.mount.js, value), buf,'utf8');
+        //res.send(buf);
+    });
     return new Handlebars.SafeString('<script src="'+val+'"></script>');
 });
 
@@ -48,18 +58,18 @@ app.get(htmlUrls.path + ':name',function(req,res){
 
 
 
-app.get(jsUrls.path + ':name',function(req,res){
+/*app.get(jsUrls.path + ':name',function(req,res){
     var name = req.params['name'];
     var b = browserify(path.resolve(options.mount.scripts, name));
-    /*b.add(path.resolve(options.mount.js, name));
-    var data = b.bundle().pipe(process.stdout);
-
-    through(function write(data) {
-        this.queue(data) //data *must* not be null
-    },
-    function end () { //optional
-        this.queue(null)
-    });*/
+    //b.add(path.resolve(options.mount.js, name));
+    //var data = b.bundle().pipe(process.stdout);
+    //
+    //through(function write(data) {
+    //    this.queue(data) //data *must* not be null
+    //},
+    //function end () { //optional
+    //    this.queue(null)
+    //});
 
     //b.add();
     b.bundle(function(e, buf){
@@ -72,7 +82,7 @@ app.get(jsUrls.path + ':name',function(req,res){
         res.send(buf);
     });
 
-});
+});*/
 
 
 
